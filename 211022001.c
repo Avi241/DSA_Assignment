@@ -17,20 +17,20 @@ int main(int argc, char *argv[])
         exit(0);
     }
     fp_w = fopen("output.txt", "w"); // Write to file ,. 'a'-->append mode
-    sum=0,average=0,min=0,max=0,counter=0;
+    fscanf(fp_r, "%d", &n);
+    sum=n,average=n,min=n,max=n,counter=1;
     while (fscanf(fp_r, "%d", &n) != EOF)
     {
         counter++;
         sum=sum+n;
-        // min=max=n;
         if(min>n)
             min=n;   
             if(max<n)
                 max=n;
     }
     average=(float)sum/counter;
-    printf("%d %ld %0.2f %d %d \n",counter,sum,average,min,max);
-    fprintf(fp_w, "%d\n", n);
+    printf("%d %d %d %ld %0.2f \n",counter,min,max,sum,average);
+    fprintf(fp_w,"%d\n%d\n%d\n%ld\n%0.2f\n",counter,min,max,sum,average);
     fclose(fp_r);
     fclose(fp_w);
     return 0;
