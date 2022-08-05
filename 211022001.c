@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
                 max=n;
     }
     average=(float)sum/counter;
-    printf("%d %d %d %ld %0.2f \n",counter,min,max,sum,average);
+    printf("%d\n%d\n%d\n%ld\n%0.2f\n",counter,min,max,sum,average);
     fprintf(fp_w,"%d\n%d\n%d\n%ld\n%0.2f\n",counter,min,max,sum,average);
     fclose(fp_r);
     fclose(fp_w);
