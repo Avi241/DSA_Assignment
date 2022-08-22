@@ -73,9 +73,12 @@ struct Stack A,B,C;
 int main(int agrc,char *argv[])
 {
     FILE *fp_w;
-    fp_w = fopen("output.txt", "w");
-
     Stack_size = atoi(argv[1]);
+    // char buffer[100];
+    // snprintf(buffer,100,"toh-%d.txt",Stack_size);
+    fp_w = fopen("toh.txt", "w");
+
+    
     A.name='A';
     A.top=-1;
     A.a=calloc(Stack_size,sizeof(int));
