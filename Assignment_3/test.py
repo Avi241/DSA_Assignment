@@ -1,7 +1,7 @@
 import filecmp
   
-f1 = "mergesort.txt"
-f2 = "output1.txt"
+f1 = "radix1.txt"
+f2 = "radix.txt"
   
 # shallow comparison
 result = filecmp.cmp(f1, f2)

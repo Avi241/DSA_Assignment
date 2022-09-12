@@ -12,44 +12,47 @@ int getMax(int arr[], int n)
 	return mx;
 }
 
-void countSort(int arr[], int n, int exp)
+void count_sort(int arr[],int size_arr,int place)
 {
-	int output[n]; // output array
-	int i, count[10] = { 0 };
+    int count_array[10]={0};
+    // print_arr(count_array,10);
+    for(int i=0;i<size_arr;i++)
+    {
+        count_array[arr[i]/place % 10]++;
+    }
 
-	// Store count of occurrences in count[]
-	for (i = 0; i < n; i++)
-		count[(arr[i] / exp) % 10]++;
+    // print_arr(count_array,10);
 
-	// Change count[i] so that count[i] now contains actual
-	// position of this digit in output[]
-	for (i = 1; i < 10; i++)
-		count[i] += count[i - 1];
+    for(int i=1;i<10;i++)
+    {
+        count_array[i]+=count_array[i-1];
+    }
+    // print_arr(count_array,10);
 
-	// Build the output array
-	for (i = n - 1; i >= 0; i--) {
-		output[count[(arr[i] / exp) % 10] - 1] = arr[i];
-		count[(arr[i] / exp) % 10]--;
-	}
+    int output_arr[size_arr];
 
-	// Copy the output array to arr[], so that arr[] now
-	// contains sorted numbers according to current digit
-	for (i = 0; i < n; i++)
-		arr[i] = output[i];
+    for(int i=0;i<size_arr;i++)
+    {
+        output_arr[--count_array[arr[i]/place % 10]]=arr[i];
+    }
+
+    // print_arr(output_arr,size_arr);
+
+    for(int i=0;i<size_arr;i++)
+    {
+        arr[i]=output_arr[i];
+    }
+
 }
 
-// The main function to that sorts arr[] of size n using
-// Radix Sort
-void radixsort(int arr[], int n, int digit_count)
+void radix_sort(int arr[],int size_arr,int digit)
 {
-	// Find the maximum number to know number of digits
-	int m = getMax(arr, n);
-
-	// Do counting sort for every digit. Note that instead
-	// of passing digit number, exp is passed. exp is 10^i
-	// where i is current digit number
-	for (int exp = 1; m / exp > 0; exp *= 10)
-		countSort(arr, n, exp);
+    int place=1;
+    for (int i = 1; i<=digit ; i++)
+    {
+        count_sort(arr,size_arr,place);
+        place*=10;
+    }
 }
 
 int main(int argc, char *argv[])
@@ -81,7 +84,7 @@ int main(int argc, char *argv[])
 	}
 	int digit_count = atoi(argv[2]);
 
-	radixsort(arr, size_file ,digit_count);
+	radix_sort(arr, size_file ,digit_count);
 	
     fp_w = fopen("radix.txt", "w");
 
