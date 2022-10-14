@@ -1,0 +1,13 @@
+insert 98
+postorder
+successor 53
+inorder
+search 37
+insert 0
+insert 38
+minimum
+postorder
+maximum
+insert 2
+successor 24
+successor 46
