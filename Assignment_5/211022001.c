@@ -24,7 +24,7 @@ struct Node *insert(struct Node *root, int value)
     if (root == NULL)
     {
         root = newNode(value);
-        printf("%d inserted\n", value);
+        fprintf(fp_w,"%d inserted\n", value);
     }
 
     /* Otherwise, recur down the tree */
@@ -40,7 +40,7 @@ void preordertraversal(struct Node *preorder)
 {
     if (preorder != NULL)
     {
-        printf("%d ", preorder->data);
+        fprintf(fp_w,"%d ", preorder->data);
         preordertraversal(preorder->left);
         preordertraversal(preorder->right);
     }
@@ -51,7 +51,7 @@ void inordertraversal(struct Node *inorder)
     if (inorder != NULL)
     {
         inordertraversal(inorder->left);
-        printf("%d ", inorder->data);
+        fprintf(fp_w,"%d ", inorder->data);
         inordertraversal(inorder->right);
     }
 }
@@ -62,7 +62,7 @@ void postordertraversal(struct Node *postordertravel)
     {
         postordertraversal(postordertravel->left);
         postordertraversal(postordertravel->right);
-        printf("%d ", postordertravel->data);
+        fprintf(fp_w,"%d ", postordertravel->data);
     }
 }
 
@@ -74,7 +74,7 @@ int maxValue(struct Node *max)
         max = max->right;
     }
 
-    printf("%d\n", max->data);
+    fprintf(fp_w,"%d\n", max->data);
     return max->data;
 }
 
@@ -85,7 +85,7 @@ int minValue(struct Node *min)
         min = min->left;
     }
 
-    printf("%d\n", min->data);
+    fprintf(fp_w,"%d\n", min->data);
     return min->data;
 }
 
@@ -98,7 +98,7 @@ struct Node *search(struct Node *root, int key)
         if (key == root->data)
         {
 
-            printf("%d found\n", root->data);
+            fprintf(fp_w,"%d found\n", root->data);
             return root;
         }
         else if (key < root->data)
@@ -109,7 +109,7 @@ struct Node *search(struct Node *root, int key)
         }
     }
 
-    printf("%d not found\n", key);
+    fprintf(fp_w,"%d not found\n", key);
     return NULL;
 }
 
@@ -134,7 +134,8 @@ void succesor(struct Node *root, int key)
                 }
             }
             if (suc != NULL)
-                printf("%d\n", suc->data);
+                fprintf(fp_w,"%d\n", suc->data);
+            return;
         }
         else if (key < temp->data)
             temp = temp->left;
@@ -143,7 +144,7 @@ void succesor(struct Node *root, int key)
             temp = temp->right;
         }
     }
-    printf("%d does not exist\n", key);
+    fprintf(fp_w,"%d does not exist\n", key);
     return;
 }
 
@@ -168,7 +169,8 @@ void predessor(struct Node *root, int key)
             }
 
             if (pre != NULL)
-                printf("%d\n", pre->data);
+                fprintf(fp_w,"%d\n", pre->data);
+            return;
         }
         else if (key < temp->data)
             temp = temp->left;
@@ -177,15 +179,15 @@ void predessor(struct Node *root, int key)
             temp = temp->right;
         }
     }
-    printf("%d does not exist\n", key);
+    fprintf(fp_w,"%d does not exist\n", key);
     return;
 }
 
 int main(int argc, char *argv[])
 {
-    // fp_r = fopen(argv[1], "r");
-    fp_r = fopen("input1.txt", "r");
-    // fp_w = fopen("stack.txt", "w");
+    fp_r = fopen(argv[1], "r");
+    // fp_r = fopen("input1.txt", "r");
+    fp_w = fopen("bst.txt", "w");
     struct Node *root = NULL;
     int i=0;
 
@@ -213,29 +215,29 @@ int main(int argc, char *argv[])
         else if (strcmp(token_1, "inorder\n") == 0)
         {
             inordertraversal(root);
-            printf("\n");
+            fprintf(fp_w,"\n");
 
         }
         else if (strcmp(token_1, "preorder\n") == 0)
         {
             preordertraversal(root);
-            printf("\n");
+            fprintf(fp_w,"\n");
         }
         else if (strcmp(token_1, "postorder\n") == 0)
         {
             postordertraversal(root);
-            printf("\n");
+            fprintf(fp_w,"\n");
         }
         else if (strcmp(token_1, "search") == 0)
         {
             char *token_2 = strtok(NULL, " ");
             search(root,atoi(token_2));
         }
-        else if (strcmp(token_1, "minimum") == 0)
+        else if (strcmp(token_1, "minimum\n") == 0)
         {
             minValue(root);
         }
-        else if (strcmp(token_1, "maximum") == 0)
+        else if (strcmp(token_1, "maximum\n") == 0)
         {
             maxValue(root);
         }
